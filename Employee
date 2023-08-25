@@ -1,0 +1,73 @@
+class Employee:
+    def __init__(self, emp_id, name, position, salary):
+        self.emp_id = emp_id
+        self.name = name
+        self.position = position
+        self.salary = salary
+
+    def display_info(self):
+        print("Employee ID:", self.emp_id)
+        print("Name:", self.name)
+        print("Position:", self.position)
+        print("Salary:", self.salary)
+
+class EmployeeDatabase:
+    def __init__(self):
+        self.employees = []
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+        print("Employee added.")
+
+    def remove_employee(self, emp_id):
+        for employee in self.employees:
+            if employee.emp_id == emp_id:
+                self.employees.remove(employee)
+                print("Employee removed.")
+                return
+        print("Employee not found.")
+
+    def view_employees(self):
+        if not self.employees:
+            print("No employees in the database.")
+        else:
+            print("=== Employee List ===")
+            for employee in self.employees:
+                print(f"ID: {employee.emp_id}, Name: {employee.name}")
+
+def main():
+    emp_db = EmployeeDatabase()
+
+    while True:
+        print("\n===== Employee Management System =====")
+        print("1. Add Employee")
+        print("2. Remove Employee")
+        print("3. View Employee List")
+        print("4. Exit")
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            emp_id = input("Enter employee ID: ")
+            name = input("Enter employee name: ")
+            position = input("Enter employee position: ")
+            salary = float(input("Enter employee salary: "))
+            employee = Employee(emp_id, name, position, salary)
+            emp_db.add_employee(employee)
+
+        elif choice == "2":
+            emp_id = input("Enter employee ID to remove: ")
+            emp_db.remove_employee(emp_id)
+
+        elif choice == "3":
+            emp_db.view_employees()
+
+        elif choice == "4":
+            print("Thank you for using the Employee Management System.")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
